@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct nftappdesignApp: App {
+    @State var router = NavigationRouter()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack(path: $router.path) {
+                OnboardingView()
+                    .navigationDestination(for: AppRoute.self) { route in
+                        AppNavigation.view(for: route)
+                    }
+
+            }
+            .environment(router)
         }
     }
 }
