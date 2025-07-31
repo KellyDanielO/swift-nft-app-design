@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    var namespace: Namespace.ID
+    @Environment(NavigationRouter.self) private var router: NavigationRouter?
+
     var navItems: [String] = [
         "Discovery",
         "Chart",
@@ -133,6 +136,9 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 375)
                     .cornerRadius(42)
+                    .onTapGesture {
+                        router?.push(AppRoute.detail)
+                    }
                     Spacer().frame(height: 20)
                     HStack(spacing: 16) {
                         ForEach(["home2", "home3"], id: \.self) { imageName in
@@ -191,6 +197,9 @@ struct HomeView: View {
                                 .padding()
                             }
                             .frame(width: screenWidth * 0.4, height: 178)
+                            .onTapGesture {
+                                router?.push(AppRoute.detail)
+                            }
                         }
                     }
 
@@ -201,6 +210,7 @@ struct HomeView: View {
             
             RoundedRectangle(cornerRadius: 42)
                 .fill(.ultraThinMaterial)
+                .matchedGeometryEffect(id: "backgroundCard", in: namespace)
                 .frame(height: 84)
                 .frame(maxWidth: .infinity)
                 .overlay(
@@ -229,5 +239,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    @Previewable @Namespace var animation
+
+    HomeView(namespace: animation, )
 }

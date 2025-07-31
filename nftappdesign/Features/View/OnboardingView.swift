@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @Namespace var animation
+
     @State private var xoffset: CGFloat = 0
     private let knobWidth: CGFloat = 70
     
@@ -72,6 +74,7 @@ struct OnboardingView: View {
 
                         RoundedRectangle(cornerRadius: 42)
                             .fill(.ultraThinMaterial)
+                            .matchedGeometryEffect(id: "backgroundCard", in: animation)
                             .frame(height: 84)
                             .frame(maxWidth: .infinity)
                             .overlay(
@@ -129,7 +132,7 @@ struct OnboardingView: View {
     
     func swipeEnded() {
         xoffset = 0
-        router?.push(AppRoute.home)
+        router?.push(AppRoute.home(namespace: animation))
         
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppRoute: Hashable {
-    case home
+    case home(namespace: Namespace.ID)
     case onboarding
     case detail
 }
@@ -20,8 +20,8 @@ struct AppNavigation {
         switch route {
         case .onboarding:
             OnboardingView()
-        case .home:
-            HomeView()
+        case .home(let nameSpace):
+            HomeView(namespace: nameSpace)
         case .detail:
             DetailView()
         }
